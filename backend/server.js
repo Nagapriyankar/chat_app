@@ -6,9 +6,10 @@ import authRoutes from "./routes/authRoutes.js"
 import connectToMongo from "./middleware/connectToMongo.js"
 import messageRoute from "./routes/messageRoute.js"
 import userRoute from "./routes/userRoute.js"
+import { app, server } from "./socket/socket.js"
 
 
-const app = express()
+//const app = express()  //express app is created in socket.io
 const PORT = process.env.PORT || 5000
 
 dotenv.config()
@@ -27,7 +28,8 @@ app.get("/", (req, res) => {
 
 })
 
-app.listen(PORT, () => {
+//listen to server
+server.listen(PORT, () => {
     connectToMongo()
     console.log(`Server is up and running on the port ${PORT}`)
 })
