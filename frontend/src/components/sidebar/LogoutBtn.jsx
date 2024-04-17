@@ -1,13 +1,20 @@
 import React from 'react'
 import { RiLogoutBoxLine } from "react-icons/ri";
+import useLogout from '../../hooks/useLogout';
 
 
 const LogoutBtn = () => {
+    const {loading, logout} = useLogout()
+
     return (
         <div className='mt-auto'>
-            <button className="btn btn-circle btn-warning">
-                <RiLogoutBoxLine />
-            </button>
+            {!loading ? (
+                <button className="btn btn-circle btn-warning" onClick={logout}>
+                    <RiLogoutBoxLine />
+                </button>
+            ) : (
+                    <span className='=loading loading-spinner'></span>
+            )}
         </div>
     )
 }

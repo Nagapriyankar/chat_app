@@ -56,11 +56,11 @@ export const getMessages = async (req, res) => {
         console.log(userToChatId)
         //get conversation by participants : senderId, userToChatId
         const conversation = await Conversation.findOne({
-            participants: { $all: [senderId, userToChatId] }
+            participants: { $all: [senderId, userToChatId] }, 
         }).populate("messages")  //this will populate actual message itself , not just ref id
 
-        if (!conversation)
-        res.status(200).json([])
+        if (!conversation) return res.status(200).json([])
+
         res.status(200).json(conversation.messages)
 
     } catch (error) {

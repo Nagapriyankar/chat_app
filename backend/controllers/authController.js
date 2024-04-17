@@ -9,7 +9,7 @@ export const login = async (req, res) => {
         
         //check if all fields provided
         if (!username || !password) {
-            res.status(400).json({error : "Please fill in all the fields"})
+            res.status(400).json({error : "Please fill in all the field"})
         }
 
         //check if user exist
