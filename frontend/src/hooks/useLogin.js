@@ -9,7 +9,7 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false)
     const {setAuthUser} = useAuthContext()
 
-    const login = async ({ username, password }) => {
+    const login = async (username, password, setUsername, setPassword ) => {
         const success = handleInputErrors({ username, password })
         if (!success) return
 
@@ -22,9 +22,9 @@ const useLogin = () => {
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({username, password})
             })
-
             const data = await res.json()
-            if (data.error) throw new Error(data.message)
+            
+            if (data.error) throw new Error(data.error)
 
             //localstorage
             localStorage.setItem("chat-user", JSON.stringify(data))
@@ -35,6 +35,8 @@ const useLogin = () => {
             toast.error(error.message)
         } finally {
             setLoading(false)
+           /*  setPassword("")
+            setUsername("") */
         }
         }
 

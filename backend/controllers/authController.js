@@ -6,10 +6,10 @@ import generateToken from "../utils/generateToken.js"
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body
-        
+        console.log(username, password)
         //check if all fields provided
         if (!username || !password) {
-            res.status(400).json({error : "Please fill in all the field"})
+           return res.status(400).json({error : "Please fill in all the field"})
         }
 
         //check if user exist
@@ -19,7 +19,7 @@ export const login = async (req, res) => {
         const isPasswordMatch = await bcrypt.compare(password, user?.password || "")
 
         if (!user || !isPasswordMatch) {
-            res.status(400).json({ error: "Invalid Email or password" })
+            return res.status(400).json({ error: "Invalid Email or password" })
         }
 
         generateToken(user._id, res)
@@ -45,7 +45,6 @@ export const signup = async (req, res) => {
 
         // requiredfield validation
         if (!fullName || !username || !password || !confirmPassword || !gender) {
-            res.status(400)
             return res.status(400).json({ error: "Please fill in all the fields" })
         }
         //passwordvalidation
