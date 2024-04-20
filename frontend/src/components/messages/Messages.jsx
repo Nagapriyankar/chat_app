@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import Message from '../messages/Message'
 import useGetMessages from '../../hooks/useGetMessages'
 import MessageSkeleton from '../skeleton/MessageSkeleton'
+import useListenMessages from '../../hooks/useListenMessages'
 
 const Messages = () => {
     const { loading, messages } = useGetMessages()   //hooks
+    useListenMessages()    //listen for any incoming messages
     const lastMsgRef = useRef()
     
     //  automatically scroll messsages

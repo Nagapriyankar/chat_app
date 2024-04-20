@@ -15,6 +15,11 @@ const io = new Server(server, {
     }
 })
 
+//to send real time messages 
+export const getReceiverSocketId = (receiverId) => {   //receiverId = userid
+    return userSocketMap[receiverId]
+}
+
 //to get online users, object created
 const userSocketMap = {}  //{userId : socketId}
 

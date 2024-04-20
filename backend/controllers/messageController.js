@@ -1,5 +1,6 @@
 import Conversation from "../models/conversationModels.js"
 import Messages from "../models/messagesModels.js"
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
     try {
@@ -32,12 +33,19 @@ export const sendMessage = async (req, res) => {
             conversation.messages.push(newMessage._id)
         }
 
-        //socket functionality will go here
-
         //save to dtabase
-
         await conversation.save()
         await newMessage.save()
+
+        //SOCKET FUNCTIONALITY HERE
+        const ReceiverSocketId = getReceiverSocketId(receiverId)
+        if (ReceiverSocketId) {
+            //io.to(socketid).emit only send event to this specific client
+            io.to(ReceiverSocketId).emit("newMessage", newMessage)
+
+            //receive thee same in front end next - in client
+        }
+
 
         res.status(200).json(newMessage)
 
