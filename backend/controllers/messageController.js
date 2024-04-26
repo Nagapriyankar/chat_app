@@ -50,7 +50,7 @@ export const sendMessage = async (req, res) => {
         res.status(200).json(newMessage)
 
     } catch (error) {
-        console.log("Error in Send Message Controller");
+        console.log("Error in Send Message Controller", error.message);
         res.status(500).json({
             error: error.message
         })
@@ -61,7 +61,7 @@ export const getMessages = async (req, res) => {
     try {
         const { id: userToChatId } = req.params
         const senderId = req.user._id
-        console.log(userToChatId)
+        
         //get conversation by participants : senderId, userToChatId
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, userToChatId] }, 
@@ -72,7 +72,7 @@ export const getMessages = async (req, res) => {
         res.status(200).json(conversation.messages)
 
     } catch (error) {
-        console.log("Error in get Message Controller");
+        console.log("Error in get Message Controller", error.message);
         res.status(500).json({
             error: error.message
         })

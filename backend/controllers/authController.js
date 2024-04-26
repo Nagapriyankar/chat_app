@@ -6,7 +6,7 @@ import generateToken from "../utils/generateToken.js"
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body
-        console.log(username, password)
+        
         //check if all fields provided
         if (!username || !password) {
            return res.status(400).json({error : "Please fill in all the field"})
@@ -102,7 +102,7 @@ export const signup = async (req, res) => {
         }
     }
     catch (error) {
-        console.log("Error in signup Controller");
+        console.log("Error in signup Controller", error.message);
         res.status(500).json({
             error: error.message
         })
@@ -118,7 +118,7 @@ export const logout = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Error in logout Controller");
+        console.log("Error in logout Controller", error.message);
         res.status(500).json({
             error: error.message
         })
