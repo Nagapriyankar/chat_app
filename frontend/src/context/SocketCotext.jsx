@@ -21,7 +21,7 @@ export const SocketContextProvier = ({children}) => {
     useEffect(() => {
         //if authenticated user available
         if (authUser) {
-            const socket = io("http://localhost:5000", {
+            const socket = io("https://chat-app-3fei.onrender.com", {
                 //to get userid when login, send it as agument to BE
                 query: {
                     userId : authUser._id
