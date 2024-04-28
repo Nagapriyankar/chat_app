@@ -38,7 +38,7 @@ const Login = () => {
                         <label className="input input-bordered flex items-center gap-2 m-5">
                             Password
                             <input
-                                type="text"
+                                type="password"
                                 className="grow"
                                 placeholder="Type here..."
                                 value={password}
